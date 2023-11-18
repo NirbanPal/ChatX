@@ -1,6 +1,7 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
+from .models import ChatModel,User
 
 class PersonalChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -45,6 +46,9 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
                 }
             )
 
+            # print(self.room_group_name)
+            await self.save_message(messageSender,message,self.room_group_name)
+
         else:
             raise ValueError(f"No handler for message type {msgType}")
 
@@ -56,3 +60,8 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
             'username':username
         }))
 
+    @database_sync_to_async
+    def save_message(self,sender,message,thread_name):
+        senderObj = User.objects.get(username=sender)
+        ChatModel.objects.create(sender=senderObj,message=message,thread_name=thread_name)
+        

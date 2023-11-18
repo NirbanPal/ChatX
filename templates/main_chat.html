@@ -89,17 +89,17 @@
                     <table class="table">
                         <tbody id='chat-body'>
                             {% for message in messages %}
-                            {% if message.sender == request.user.username %}
+                            {% if message.sender == request.user %}
                             <tr>
                                 <td>
                                     <p class="bg-success p-2 mt-2 mr-5 shadow-sm text-white float-right rounded">
                                         {{message.message}}
                                     </p>
                                 </td>
-                                {% comment %} <td>
+                                <td>
                                     <p><small class="p-1 shadow-sm">{{message.timestamp|time:'H:i'}}</small>
                                     </p>
-                                </td> {% endcomment %}
+                                </td>
                             </tr>
                             {% else %}
                             <tr>
@@ -108,10 +108,10 @@
                                         {{message.message}}
                                     </p>
                                 </td>
-                                {% comment %} <td>
+                                <td>
                                     <p><small class="p-1 shadow-sm">{{message.timestamp|time:'H:i'}}</small>
                                     </p>
-                                </td> {% endcomment %}
+                                </td>
                             </tr>
                             {% endif %}
                             {% endfor %}
