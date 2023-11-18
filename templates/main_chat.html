@@ -96,10 +96,10 @@
                                         {{message.message}}
                                     </p>
                                 </td>
-                                <td>
+                                {% comment %} <td>
                                     <p><small class="p-1 shadow-sm">{{message.timestamp|time:'H:i'}}</small>
                                     </p>
-                                </td>
+                                </td> {% endcomment %}
                             </tr>
                             {% else %}
                             <tr>
@@ -108,10 +108,10 @@
                                         {{message.message}}
                                     </p>
                                 </td>
-                                <td>
+                                {% comment %} <td>
                                     <p><small class="p-1 shadow-sm">{{message.timestamp|time:'H:i'}}</small>
                                     </p>
-                                </td>
+                                </td> {% endcomment %}
                             </tr>
                             {% endif %}
                             {% endfor %}
@@ -164,6 +164,6 @@
 {% endblock %}
 {% block javascript %}
 <script src="{% static 'js/chat.js' %}"></script>
-<script src="{% static 'js/online_status.js' %}"></script>
-<script src="{% static 'js/notify.js' %}"></script>
+{% comment %} <script src="{% static 'js/online_status.js' %}"></script> {% endcomment %}
+{% comment %} <script src="{% static 'js/notify.js' %}"></script> {% endcomment %}
 {% endblock %}

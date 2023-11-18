@@ -32,10 +32,59 @@ socket.onerror = function(e){
 
 //If there is sny incoming message in the socket
 socket.onmessage = function(e){
-    // data = json.parse(e.data)
-    console.log(e)
+    const data = JSON.parse(e.data)
+    console.log(data)
+    if(data.message && data.username===message_username){
+        document.querySelector("#chat-body").innerHTML += `
+        <tr>
+            <td>
+                <p class="bg-success p-2 mt-2 mr-5 shadow-sm text-white float-right rounded">
+                    ${data.message}
+                </p>
+            </td>
+        </tr>`
+    }
+    else{
+        document.querySelector("#chat-body").innerHTML += `
+        <tr>
+            <td>
+                <p class="bg-primary p-2 mt-2 mr-5 shadow-sm text-white float-left rounded">
+                    ${data.message}
+                </p>
+            </td>
+        </tr>`
+
+    }
+
+    
 
 }
 
+
+document.getElementById('chat-message-submit').onclick = function(e){
+    e.preventDefault()
+
+    const messageInputDom = document.querySelector('#message_input')
+    const message = messageInputDom.value
+    if (message.trim()===""){
+
+        alert('You can not send only whitespaces as message')
+
+        messageInputDom.value='';
+        return false
+    }
+    else{
+        
+        socket.send(JSON.stringify({
+            'type':'chat-message',
+            'message':message,
+            'username':message_username
+        }));
+    
+        messageInputDom.value='';
+    
+        return false
+    }
+}
 
 
