@@ -4,6 +4,6 @@ from ChatXapp.views import *
 
 urlpatterns = [
     path('',index,name="home"),
-    path('<str:username>/',chatPage,name="chat"),
+    path('chat/<str:username>/',chatPage,name="chat"),
 
 ]

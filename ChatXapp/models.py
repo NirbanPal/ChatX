@@ -3,6 +3,19 @@ from django.contrib.auth.models import User
 # Create your models here.
 #models for storing the messages
 
+
+class UserProfileModel(models.Model):
+    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    name = models.CharField(max_length=50,null=True, blank=True)
+    online_status = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.user.username+'->'+str(self.online_status)
+
+
+
+
+
 class ChatModel(models.Model):
     sender = models.ForeignKey(User,on_delete=models.CASCADE)
     message = models.TextField(null=True,blank=True)
@@ -11,3 +24,4 @@ class ChatModel(models.Model):
 
     def __str__(self):
         return self.message
+    

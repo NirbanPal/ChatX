@@ -18,7 +18,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 
 from channels.auth import AuthMiddlewareStack
 
-from ChatXapp.consumers import PersonalChatConsumer
+from ChatXapp.consumers import PersonalChatConsumer, OnlineStatusConsumer
 
 #added import ends here 
 
@@ -31,7 +31,8 @@ application = get_asgi_application()
 application = ProtocolTypeRouter({
     'websocket':AuthMiddlewareStack(
         URLRouter([
-            path('ws/<int:id>/',PersonalChatConsumer.as_asgi())
+            path('ws/<int:id>/',PersonalChatConsumer.as_asgi()),
+            path('ws/online/',OnlineStatusConsumer.as_asgi())
         ])
     )
 })

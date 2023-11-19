@@ -33,7 +33,6 @@ socket.onerror = function(e){
 //If there is sny incoming message in the socket
 socket.onmessage = function(e){
     const data = JSON.parse(e.data)
-    console.log(data)
     if(data.message && data.username===message_username){
         document.querySelector("#chat-body").innerHTML += `
         <tr>
