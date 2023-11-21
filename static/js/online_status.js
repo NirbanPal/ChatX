@@ -1,4 +1,4 @@
-const loggedin_username = JSON.parse(document.getElementById('json-message-username').textContent)
+const loggedin_username = JSON.parse(document.getElementById('json-username-sender').textContent)
 const online_status = new WebSocket(
     'ws://'
     +window.location.host

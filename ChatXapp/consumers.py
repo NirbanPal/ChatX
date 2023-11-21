@@ -1,7 +1,7 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
-from .models import ChatModel,User, UserProfileModel
+from .models import ChatModel,User, UserProfileModel, ChatNotification
 
 class PersonalChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -35,6 +35,10 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         msgType = data['type']
         message=data['message']
         messageSender = data['username']
+        messageReceiver=data['receiver']
+        print(messageReceiver)
+
+        await self.save_message(messageSender,message,self.room_group_name,messageReceiver)
 
         if msgType=='chat-message':
             await self.channel_layer.group_send(
@@ -47,7 +51,6 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
             )
 
             # print(self.room_group_name)
-            await self.save_message(messageSender,message,self.room_group_name)
 
         else:
             raise ValueError(f"No handler for message type {msgType}")
@@ -61,9 +64,46 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         }))
 
     @database_sync_to_async
-    def save_message(self,sender,message,thread_name):
+    def save_message(self,sender,message,thread_name,messageReceiver):
         senderObj = User.objects.get(username=sender)
-        ChatModel.objects.create(sender=senderObj,message=message,thread_name=thread_name)
+        Chatobj=ChatModel.objects.create(sender=senderObj,message=message,thread_name=thread_name)
+        other_user_id=self.scope['url_route']['kwargs']['id']
+        receiverObj = User.objects.get(id=other_user_id)
+        if messageReceiver == receiverObj.username:
+            # ChatNotification.objects.create(chat=Chatobj,user=receiverObj)
+
+
+
+
+class NotificationConsumer(AsyncWebsocketConsumer):
+    async def connect(self):
+        user_id = self.scope['user'].id
+        self.room_group_name = f"{user_id}_notify"
+        await self.channel_layer.group_add(
+            self.room_group_name,
+            self.channel_name
+        )
+
+        await self.accept()
+
+    async def disconnect(self, code):
+        await self.channel_layer.group_discard(
+            self.room_group_name,
+            self.channel_name
+        )
+
+    async def send_notification(self,event):
+        data=json.loads(event['value'])
+        print(data)
+        await self.send(text_data=json.dumps({
+            'countOfNotifi':data['noOfNotifi']
+        }))
+
+
+
+
+
+
         
 class OnlineStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
@@ -113,6 +153,8 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
         else:
             userprofile.online_status=False
             userprofile.save()
+
+
 
 
 

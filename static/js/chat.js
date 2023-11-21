@@ -1,7 +1,7 @@
 //id of that user with whom current user will talk
 const id = JSON.parse(document.getElementById('json-username').textContent);
 
-const message_username = JSON.parse(document.getElementById('json-message-username').textContent);
+const sender_username = JSON.parse(document.getElementById('json-username-sender').textContent);
 
 const receiver_username = JSON.parse(document.getElementById('json-username-receiver').textContent);
 
@@ -33,7 +33,7 @@ socket.onerror = function(e){
 //If there is sny incoming message in the socket
 socket.onmessage = function(e){
     const data = JSON.parse(e.data)
-    if(data.message && data.username===message_username){
+    if(data.message && data.username===sender_username){
         document.querySelector("#chat-body").innerHTML += `
         <tr>
             <td>
@@ -77,7 +77,8 @@ document.getElementById('chat-message-submit').onclick = function(e){
         socket.send(JSON.stringify({
             'type':'chat-message',
             'message':message,
-            'username':message_username
+            'username':sender_username,
+            'receiver':receiver_username,
         }));
     
         messageInputDom.value='';
