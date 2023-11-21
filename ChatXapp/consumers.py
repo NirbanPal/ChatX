@@ -65,7 +65,6 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         senderObj = User.objects.get(username=sender)
         ChatModel.objects.create(sender=senderObj,message=message,thread_name=thread_name)
         
-
 class OnlineStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_group_name = 'user'
@@ -90,14 +89,18 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
         await self.change_online_status(username,connection_type)
     
     async def send_onlineStatus(self,event):
-        data=json.loads(event.get('value'))
-        print(data)
-        username = data['username']
-        online_status = data['status']
-        await self.send(text_data=json.dumps({
-            'username':username,
-            'online_status':online_status
-        }))
+        try:
+            data=json.loads(event.get('value'))
+            # print(data)
+            username = data['username']
+            online_status = data['status']
+            await self.send(text_data=json.dumps({
+                'username':username,
+                'online_status':online_status
+            }))
+        except Exception as e:
+            print(e)
+
 
 
     @database_sync_to_async

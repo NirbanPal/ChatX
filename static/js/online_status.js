@@ -9,7 +9,7 @@ const online_status = new WebSocket(
 online_status.onopen = function(e){
     online_status.send(JSON.stringify({
         'username':loggedin_username,
-        'type':'open'
+        'type':'open',
     }))
 
 }
@@ -18,7 +18,7 @@ online_status.onopen = function(e){
 window.addEventListener("beforeunload", function(e){
     online_status.send(JSON.stringify({
         'username':loggedin_username,
-        'type':'offline'
+        'type':'offline',
     }))
 })
 
