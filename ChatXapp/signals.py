@@ -7,7 +7,6 @@ import json
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
-
 #Signals for Notifications
 @receiver(post_save,sender=ChatNotification)
 def send_notification(sender,instance,created,**kwargs):
@@ -22,11 +21,11 @@ def send_notification(sender,instance,created,**kwargs):
             'noOfNotifi':unseenNotifiCounts,
         }
         print(room_gr_name)
-        # pdb.set_trace()
+    
         async_to_sync(channel_layer.group_send)(
             room_gr_name,
             {
-                'type':send_notification,
+                'type':'send_notification',
                 'value':json.dumps(data)
             }
 

@@ -70,9 +70,8 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         other_user_id=self.scope['url_route']['kwargs']['id']
         receiverObj = User.objects.get(id=other_user_id)
         if messageReceiver == receiverObj.username:
-            # ChatNotification.objects.create(chat=Chatobj,user=receiverObj)
-
-
+            ChatNotification.objects.create(chat=Chatobj,user=receiverObj)
+            # pass
 
 
 class NotificationConsumer(AsyncWebsocketConsumer):
@@ -92,9 +91,10 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             self.channel_name
         )
 
+
     async def send_notification(self,event):
         data=json.loads(event['value'])
-        print(data)
+        print(event)
         await self.send(text_data=json.dumps({
             'countOfNotifi':data['noOfNotifi']
         }))
