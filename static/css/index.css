@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@1,300&display=swap');
 .back-top {
     background-color: #009688;
-    height: 15vh;
+    height: 60px;
   }
   
   .back-main {
     background-color: #d9dbd5;
-    height: 85vh;
+    height: 100%;
+    overflow: hidden;
   }
   
   .back-container {
@@ -20,7 +22,7 @@
   }
   .front-container1 {
     position: absolute;
-    top: 20px;
+    top: 60px;
     left: 0;
     right: 0;
   }
@@ -44,11 +46,14 @@
   .contact-table-scroll {
     overflow-y: scroll;
     height: 600px;
+
   }
   
   .message-area {
     background-color: #e4e1de;
     min-height: 600px;
+    overflow: hidden;
+    padding: 0;
   }
   
   .message-table-scroll {
@@ -59,3 +64,4 @@
   .message-box {
     background-color: #f0f0f0;
   }
+

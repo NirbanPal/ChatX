@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'ChatXapp',
+    'register',
 ]
 
 MIDDLEWARE = [
@@ -146,4 +147,9 @@ STATIC_ROOT = os.path.join(BASE_DIR,'static_collection')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+LOGOUT_REDIRECT_URL="/"
+LOGIN_REDIRECT_URL="/"
+LOGIN_URL="/userlogin/login/"
 

@@ -9,15 +9,24 @@
 
 {% block content %}
 <div class="back-container">
-    <div class="container-fluid front-container">
-        <div class="back-top"></div>
-        <div class="back-main"></div>
+    <div class="container-fluid front-container p-0">
+        <div class="back-top d-flex justify-content-between align-items-center"><h3 class="font-weight-bold ml-3" style="font-family: 'Noto Serif', serif; color: white;">ChatX</h3>
+        <div class="mr-3 text-center">
+            <a class="btn btn-info btn-sm mr-1" href=""><svg style="margin-bottom:1px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle mr-1" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+              </svg>Create Rooms</a>
+            <a class="btn btn-danger btn-sm" href="/userlogin/logout/">Logout</a>
+        </div>
+        </div>
+        <div class="back-main">
+        </div>
     </div>
-    <div class="container front-container1">
+    <div class="container-fluid front-container1 m-0">
         <div class="row chat-top">
             <div class="col-sm-4 border-right border-secondary">
                 <img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle">
-                <span class="ml-2">{{request.user.username}}</span>
+                <span class="ml-2" style="text-transform: capitalize;">{{request.user.username}}</span>
                 <span class="float-right mt-2">
                     <div class="Notifications">
                         <i class="fa fa-bell-o" aria-hidden="true"></i>
@@ -62,19 +71,34 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-4 contacts">
+            <div class="col-sm-4 contacts p-0">
                 <div class="contact-table-scroll">
                     <table class="table table-hover">
                         <tbody>
                             {% for user in users %}
-                            <tr>
-                                <td><img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle">
+                            <tr class="d-flex flex-column">
+                                <td class="p-3 border-bottom d-flex align-items-center justify-content-between">
+                                    {% if user.userprofilemodel.online_status %}
+                                    <div class="d-flex align-items-center">
+                                        <img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle mr-2">
+                                        
+                                        <a style="color: green; text-transform: capitalize;text-decoration:none;" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a>
+                                    </div>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dot text-success" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                    </svg>                        
+                                    {% else %}
+                                    <div class="d-flex align-items-center">
+                                        <img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle mr-2">
+                                        <a style="color: grey; text-transform: capitalize; text-decoration:none;" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a>
+                                    </div>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dot text-success d-none" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                    </svg>
+                                    {% endif %}
                                 </td>
-                                {% if user.userprofilemodel.online_status %}
-                                <td><a style="color: green" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a></td>
-                                {% else %}
-                                <td><a style="color: grey" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a></td>
-                                {% endif %}
                             </tr>
                             {% endfor %}
 
@@ -92,24 +116,18 @@
                             {% if message.sender == request.user %}
                             <tr>
                                 <td>
-                                    <p class="bg-success p-2 mt-2 mr-5 shadow-sm text-white float-right rounded">
+                                    <p class="bg-success p-2 mt-2 mr-3 shadow-sm text-white float-right rounded">
                                         {{message.message}}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p><small class="p-1 shadow-sm">{{message.timestamp|time:'H:i'}}</small>
+                                        <sub class="p-1 shadow-sm"><small>{{message.timestamp|time:'H:i'}}</small></sub>
                                     </p>
                                 </td>
                             </tr>
                             {% else %}
                             <tr>
                                 <td>
-                                    <p class="bg-primary p-2 mt-2 mr-5 shadow-sm text-white float-left rounded">
+                                    <p class="bg-primary p-2 mt-2 ml-3 shadow-sm text-white float-left rounded">
                                         {{message.message}}
-                                    </p>
-                                </td>
-                                <td>
-                                    <p><small class="p-1 shadow-sm">{{message.timestamp|time:'H:i'}}</small>
+                                        <sub class="p-1 shadow-sm"><small>{{message.timestamp|time:'H:i'}}</small></sub>
                                     </p>
                                 </td>
                             </tr>
@@ -148,7 +166,7 @@
                     </div>
                     <div class="col-sm-2 mt-1">
                         <div class="control">
-                            <button class="btn btn-success" id="chat-message-submit">Submit</button>
+                            <button class="btn btn-success btn-sm" id="chat-message-submit">➤ Send</button>
                         </div>
                     </div>
 

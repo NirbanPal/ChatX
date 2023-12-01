@@ -9,13 +9,22 @@
 
 {% block content %}
 <div class="back-container">
-    <div class="container-fluid front-container">
-        <div class="back-top"></div>
-        <div class="back-main"></div>
+    <div class="container-fluid front-container p-0">
+        <div class="back-top d-flex justify-content-between align-items-center"><h3 class="font-weight-bold ml-3" style="font-family: 'Noto Serif', serif; color: white;">ChatX</h3>
+        <div class="mr-3 text-center">
+            <a class="btn btn-info btn-sm mr-1" href=""><svg style="margin-bottom:1px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle mr-1" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+              </svg>Create Rooms</a>
+            <a class="btn btn-danger btn-sm" href="/userlogin/logout">Logout</a>
+        </div>
+        </div>
+        <div class="back-main">
+        </div>
     </div>
-    <div class="container front-container1">
+    <div class="container front-container1 m-0">
         <div class="row">
-            <div class="col-sm-4 contacts">
+            <!-- <div class="col-sm-4 contacts p-0">
                 <div class="contact-table-scroll">
                     <table class="table table-hover">
                         <tbody>
@@ -24,6 +33,47 @@
                                 <td><img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle">
                                 </td>
                                 <td><a href="{% url 'chat' username=user.username %}">{{user.username}}</a></td>
+                            </tr>
+                            {% endfor %}
+
+
+
+
+                
+                        </tbody>
+                    </table>
+                </div>
+
+            </div> -->
+            
+            <div class="col-sm-4 contacts p-0">
+                <div class="contact-table-scroll">
+                    <table class="table table-hover">
+                        <tbody>
+                            {% for user in users %}
+                            <tr class="d-flex flex-column">
+                                <td class="p-3 border-bottom d-flex align-items-center justify-content-between">
+                                    {% if user.userprofilemodel.online_status %}
+                                    <div class="d-flex align-items-center">
+                                        <img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle mr-2">
+                                        
+                                        <a style="color: green; text-transform: capitalize;text-decoration:none;" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a>
+                                    </div>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dot text-success" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                    </svg>                        
+                                    {% else %}
+                                    <div class="d-flex align-items-center">
+                                        <img src="{% static 'assets/dp.png' %}" alt="" class="profile-image rounded-circle mr-2">
+                                        <a style="color: grey; text-transform: capitalize; text-decoration:none;" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a>
+                                    </div>
+
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dot text-success d-none" viewBox="0 0 16 16">
+                                        <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
+                                    </svg>
+                                    {% endif %}
+                                </td>
                             </tr>
                             {% endfor %}
 
