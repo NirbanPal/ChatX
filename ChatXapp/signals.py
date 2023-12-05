@@ -63,7 +63,6 @@ def send_onlineStatus(sender,instance,created,**kwargs):
             'status':userStatus
         }
 
-
         async_to_sync(channel_layer.group_send)(
             'user',
             {
@@ -72,6 +71,7 @@ def send_onlineStatus(sender,instance,created,**kwargs):
             }
 
         )
+
 
 
 

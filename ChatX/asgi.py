@@ -18,7 +18,7 @@ from channels.routing import ProtocolTypeRouter, URLRouter
 
 from channels.auth import AuthMiddlewareStack
 
-from ChatXapp.consumers import PersonalChatConsumer, OnlineStatusConsumer, NotificationConsumer
+from ChatXapp.consumers import PersonalChatConsumer, OnlineStatusConsumer, NotificationConsumer, ChatConsumer
 
 #added import ends here 
 
@@ -34,6 +34,7 @@ application = ProtocolTypeRouter({
             path('ws/<int:id>/',PersonalChatConsumer.as_asgi()),
             path('ws/online/',OnlineStatusConsumer.as_asgi()),
             path('ws/notification/',NotificationConsumer.as_asgi()),
+            path('ws/<str:room_name>/', ChatConsumer.as_asgi()),
         ])
     )
 })

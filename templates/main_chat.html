@@ -8,20 +8,6 @@
 {% endblock %}
 
 {% block content %}
-<div class="back-container">
-    <div class="container-fluid front-container p-0">
-        <div class="back-top d-flex justify-content-between align-items-center"><h3 class="font-weight-bold ml-3" style="font-family: 'Noto Serif', serif; color: white;">ChatX</h3>
-        <div class="mr-3 text-center">
-            <a class="btn btn-info btn-sm mr-1" href=""><svg style="margin-bottom:1px;" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus-circle mr-1" viewBox="0 0 16 16">
-                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
-                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
-              </svg>Create Rooms</a>
-            <a class="btn btn-danger btn-sm" href="/userlogin/logout/">Logout</a>
-        </div>
-        </div>
-        <div class="back-main">
-        </div>
-    </div>
     <div class="container-fluid front-container1 m-0">
         <div class="row chat-top">
             <div class="col-sm-4 border-right border-secondary">
@@ -175,7 +161,6 @@
         </div>
     </div>
 
-</div>
 {{user.id|json_script:"json-username"}}
 {{user.username|json_script:"json-username-receiver"}}
 {{request.user.username|json_script:"json-username-sender"}}

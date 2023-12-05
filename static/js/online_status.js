@@ -68,6 +68,7 @@ online_status.onmessage = function(e){
         }else{
             user_to_change.style.color = 'grey'
             small_status_to_change.textContent = 'Offline'
+            
         }
     }
 }

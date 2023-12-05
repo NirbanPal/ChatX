@@ -10,9 +10,6 @@
     overflow: hidden;
   }
   
-  .back-container {
-    position: relative;
-  }
   
   .front-container {
     position: absolute;

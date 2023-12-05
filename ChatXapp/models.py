@@ -32,3 +32,20 @@ class ChatNotification(models.Model):
         return self.user.username+str(self.is_seen)
     
 
+# models of rooms
+class Room(models.Model):
+    name = models.CharField(max_length=255)
+    slug = models.SlugField(unique=True)
+    creator = models.ForeignKey(User, on_delete=models.CASCADE)
+
+
+class Message(models.Model):
+    room = models.ForeignKey(Room, related_name='messages', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='messages', on_delete=models.CASCADE)
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ('date_added',)
+    
+
