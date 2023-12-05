@@ -62,13 +62,15 @@ online_status.onmessage = function(e){
     if(data.username != loggedin_username){
         var user_to_change = document.getElementById(`${data.username}_status`)
         var small_status_to_change = document.getElementById(`${data.username}_small`)
+        var dotStatus = document.getElementById(`${data.username}_dotStatus`)
         if(data.online_status == true){
             user_to_change.style.color = 'green'
             small_status_to_change.textContent = 'Online'
+            dotStatus.classList.remove("d-none")
         }else{
             user_to_change.style.color = 'grey'
             small_status_to_change.textContent = 'Offline'
-            
+            dotStatus.classList.add("d-none")
         }
     }
 }
