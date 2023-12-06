@@ -80,7 +80,7 @@
                                         <a style="color: grey; text-transform: capitalize; text-decoration:none;" id="{{user.username}}_status" href="{% url 'chat' username=user.username %}">{{user.username}}</a>
                                     </div>
 
-                                    <svg id="{{user.username}}_dotStatus" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dot text-white" viewBox="0 0 16 16">
+                                    <svg id="{{user.username}}_dotStatus" xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-dot text-success d-none" viewBox="0 0 16 16">
                                         <path d="M8 9.5a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3"/>
                                     </svg>
                                     {% endif %}
@@ -152,7 +152,7 @@
                     </div>
                     <div class="col-sm-2 mt-1">
                         <div class="control">
-                            <button class="btn btn-success btn-sm" id="chat-message-submit">➤ Send</button>
+                            <button class="btn btn-success btn-sm disabled not-allowed" id="chat-message-submit">➤ Send</button>
                         </div>
                     </div>
 

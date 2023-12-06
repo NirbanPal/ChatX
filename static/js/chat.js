@@ -5,6 +5,10 @@ const sender_username = JSON.parse(document.getElementById('json-username-sender
 
 const receiver_username = JSON.parse(document.getElementById('json-username-receiver').textContent);
 
+const messageInput = document.getElementById('message_input');
+
+var sendButton = document.getElementById('chat-message-submit');
+
 // Creating the socket connection
 const socket = new WebSocket(
     'ws://'
@@ -60,16 +64,15 @@ socket.onmessage = function(e){
 }
 
 
-document.getElementById('chat-message-submit').onclick = function(e){
+sendButton.onclick = function(e){
     e.preventDefault()
 
-    const messageInputDom = document.querySelector('#message_input')
-    const message = messageInputDom.value
+    const message = messageInput.value
     if (message.trim()===""){
 
         alert('You can not send only whitespaces as message')
 
-        messageInputDom.value='';
+        messageInput.value='';
         return false
     }
     else{
@@ -80,11 +83,39 @@ document.getElementById('chat-message-submit').onclick = function(e){
             'username':sender_username,
             'receiver':receiver_username,
         }));
-    
-        messageInputDom.value='';
-    
+        
+        messageInput.value='';
+        sendButton.disabled = true;
+        sendButton.classList.add('not-allowed','disabled')
+        // scrollToBottom()
         return false
     }
 }
 
+
+
+// Add an event listener to the input field
+messageInput.addEventListener('input', function() {
+    // Check if the input value contains only spaces
+    if (messageInput.value.trim() === '' || messageInput.value===null) {
+        // If only spaces, disable the send button
+        sendButton.disabled = true;
+        sendButton.classList.add('not-allowed','disabled')
+    } else {
+        // If some letters are typed, enable the send button
+        sendButton.disabled = false;
+        sendButton.classList.remove('not-allowed','disabled')
+
+    }
+});
+
+//scroll to bottom
+// function scrollToBottom() {
+//     let objDiv = document.getElementById("chat-body");
+//     console.log(objDiv.scrollHeight)
+
+//     objDiv.scrollTop = objDiv.scrollHeight;
+// }
+
+// scrollToBottom()
 

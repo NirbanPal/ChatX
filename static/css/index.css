@@ -62,3 +62,6 @@
     background-color: #f0f0f0;
   }
 
+  .not-allowed {
+    cursor: not-allowed !important;
+}

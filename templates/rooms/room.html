@@ -4,13 +4,18 @@
 {% block title %}{{ room.name }} {% endblock %}
 
 {% block content %}
-<div class="p-10 lg:p-20 text-center">
-    <h1 class="text-3xl lg:text-6xl text-white">{{ room.name }}</h1>
+<div class="p-5 lg:p-8 text-center">
+    <h1 class="text-3xl lg:text-6xl text-white">{{room.name|capfirst}}</h1>
 </div>
 
 <div class="lg:w-2/4 mx-4 lg:mx-auto p-4 bg-white rounded-xl">
     <div class="chat-messages space-y-3" id="chat-messages">
+        {% if messages %}
         {% for m in messages %}<b>{{ m.user.username }}</b>: {{ m.content }}<br>{% endfor %}
+        {% else %}
+        <b id="nomesseagesid" class=""><small><center>No Messages Till Now</center></small></b>
+        {% endif %}
+
     </div>
 </div>
 
@@ -19,10 +24,7 @@
         {% csrf_token %}
         <input type="text" name="content" class="flex-1 mr-3" placeholder="Your message..." id="chat-message-input">
 
-        <button 
-            class="px-5 py-3 rounded-xl text-white bg-green-600 hover:bg-teal-700"
-            id="chat-message-submit"
-        >Send</button>
+        <button class="px-5 py-3 rounded-xl text-white bg-green-600 hover:bg-teal-700 opacity-50 cursor-not-allowed" id="chat-message-submit" disabled>Send</button>
     </form>
 </div>
 {% endblock %}
@@ -35,6 +37,38 @@
 {{ request.user.username|json_script:"json-username" }}
 
 <script>
+
+    //functionality(enable/disable) of the button accoriding to message
+    var messageInput = document.getElementById('chat-message-input')
+    var sendButton = document.getElementById('chat-message-submit');
+    // Add an event listener to the input field
+    messageInput.addEventListener('input', function() {
+        // Check if the input value contains only spaces
+        if (messageInput.value.trim() === '' || messageInput.value===null) {
+            // If only spaces, disable the send button
+            sendButton.disabled = true;
+            sendButton.classList.add('opacity-50','cursor-not-allowed')
+        } else {
+            // If some letters are typed, enable the send button
+            sendButton.disabled = false;
+            sendButton.classList.remove('opacity-50','cursor-not-allowed')
+
+        }
+    });
+
+
+        //if there is no message show message functionality
+        function checkMessage(){
+        var noMsgIdentifier = document.getElementById('nomesseagesid');
+        if (noMsgIdentifier){
+            if (!noMsgIdentifier.classList.contains('hidden')){
+                noMsgIdentifier.classList.add('hidden')
+            }
+
+        }
+
+    }
+
     // textcontent cause we want only the content of the script tag
     const roomName = JSON.parse(document.getElementById('json-roomname').textContent);
     const userName = JSON.parse(document.getElementById('json-username').textContent);
@@ -50,11 +84,13 @@
         console.log('onclose')
     }
 
+
+
     chatSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
 
         if (data.message) {
-
+            checkMessage()
             document.querySelector('#chat-messages').innerHTML += ('<b>' + data.username + '</b>: ' + data.message + '<br>');
         } else {
             alert('The message was empty!')
@@ -71,7 +107,7 @@
     // };
 
     // function passing event function (e)
-    document.querySelector('#chat-message-submit').onclick = function(e) {
+    sendButton.onclick = function(e) {
         e.preventDefault()
 
         const messageInputDom = document.querySelector('#chat-message-input');
@@ -85,7 +121,10 @@
             'room': roomName
         }));
 
+        sendButton.disabled = true;
+        sendButton.classList.add('opacity-50','cursor-not-allowed')
         messageInputDom.value = '';
+
 
         return false
     };
