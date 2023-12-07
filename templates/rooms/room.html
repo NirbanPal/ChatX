@@ -3,6 +3,19 @@
 
 {% block title %}{{ room.name }} {% endblock %}
 
+{% block navele %}
+<a href="/rooms" data-tooltip-target="tooltip-animation-gotoroom" class="px-1 py-[1px] sm:px-2 sm:py-1 rounded text-white bg-teal-600 hover:bg-teal-950"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-house inline-block mb-1 mr-[2px]" viewBox="0 0 16 16">
+    <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293zM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5z"/>
+  </svg><span class="hidden sm:inline-block">Rooms</span></a>
+
+<!-- room tooltip -->
+<div id="tooltip-animation-gotoroom" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+    Rooms
+    <div class="tooltip-arrow" data-popper-arrow></div>
+</div>
+
+{% endblock%}
+
 {% block content %}
 <div class="p-5 lg:p-8 text-center">
     <h1 class="text-3xl lg:text-6xl text-white">{{room.name|capfirst}}</h1>
@@ -24,7 +37,7 @@
         {% csrf_token %}
         <input type="text" name="content" class="flex-1 mr-3" placeholder="Your message..." id="chat-message-input">
 
-        <button class="px-5 py-3 rounded-xl text-white bg-green-600 hover:bg-teal-700 opacity-50 cursor-not-allowed" id="chat-message-submit" disabled>Send</button>
+        <button class="px-1 sm:px-5 sm:py-3 rounded-xl text-white bg-green-600 hover:bg-teal-700 opacity-50 cursor-not-allowed" id="chat-message-submit" disabled>Send</button>
     </form>
 </div>
 {% endblock %}

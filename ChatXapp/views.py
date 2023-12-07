@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.contrib.auth import get_user_model
 from ChatXapp.models import ChatModel,Room,Message
 from django.contrib.auth.decorators import login_required
@@ -45,3 +45,16 @@ def room(request,slug):
    
 
     return render(request, 'rooms/room.html', {'room': room, 'messages': messages})
+
+
+
+def createrooms(request):
+
+    roomName = request.POST['roomName']
+    roomDescription = request.POST['roomDescription']
+    if roomName == "" or roomDescription=="":
+        return redirect('rooms')
+    Room.objects.create(name=roomName,slug=roomName.replace(" ", ""),creator=request.user)
+    return redirect('rooms')
+
+

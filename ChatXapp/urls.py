@@ -6,6 +6,8 @@ urlpatterns = [
     path('',index,name="home"),
     path('chat/<str:username>/',chatPage,name="chat"),
     path('rooms/',rooms,name="rooms"),
-    path('<slug:slug>/',room,name="room"),
+    path('rooms/<slug:slug>/',room,name="room"),
+    path('createrooms/',createrooms,name="createroom"),
+
 
 ]

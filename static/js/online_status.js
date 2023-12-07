@@ -65,12 +65,12 @@ online_status.onmessage = function(e){
         var dotStatus = document.getElementById(`${data.username}_dotStatus`)
         if(data.online_status == true){
             user_to_change.style.color = 'green'
-            small_status_to_change.textContent = 'Online'
             dotStatus.classList.remove("d-none")
+            small_status_to_change.textContent = 'Online'
         }else{
             user_to_change.style.color = 'grey'
-            small_status_to_change.textContent = 'Offline'
             dotStatus.classList.add("d-none")
+            small_status_to_change.textContent = 'Offline'
         }
     }
 }

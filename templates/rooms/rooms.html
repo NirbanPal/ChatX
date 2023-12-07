@@ -2,18 +2,77 @@
 
 {% block title %}Rooms {% endblock %}
 
+{% block navele %}
+    <button type="button" data-tooltip-target="tooltip-animation-createroom" class="px-1 py-[1px] sm:px-2 sm:py-1 rounded text-white bg-teal-600 hover:bg-teal-950" data-modal-target="authentication-modal" data-modal-toggle="authentication-modal"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-plus inline-block mb-1 mr-[2px]" viewBox="0 0 16 16">
+        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+    </svg><span class="hidden sm:inline-block">Create Room</span></button>
+
+            <!-- create room tooltip -->
+            <div id="tooltip-animation-createroom" role="tooltip" class="absolute z-10 invisible inline-block px-3 py-2 text-sm font-medium text-white transition-opacity duration-300 bg-gray-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-gray-700">
+                Create rooms
+                <div class="tooltip-arrow" data-popper-arrow></div>
+            </div>
+
+            <!-- create meeting modal -->
+            <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+                class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full" style="margin-left:0">
+                <div class="relative p-4 w-full max-w-md max-h-full">
+                    <!-- Modal content -->
+                    <div class="relative bg-white rounded-lg shadow bg-teal-800 dark:bg-teal-800">
+                        <!-- Modal header -->
+                        <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-teal-900">
+                            <h3 class="text-xl font-semibold text-white">
+                                Create Your Room
+                            </h3>
+                            <button type="button"
+                                class="end-2.5 text-teal-400 bg-transparent hover:bg-teal-200 hover:text-teal-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-teal-600 dark:hover:text-white"
+                                data-modal-hide="authentication-modal">
+                                <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 14 14">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+                                </svg>
+                                <span class="sr-only">Close modal</span>
+                            </button>
+                        </div>
+                        <!-- Modal body -->
+                        <div class="p-4 pt-0">
+                            <form class="space-y-4" action="{% url 'createroom' %}" method="POST">
+                                {% csrf_token %}
+                                <div>
+                                    <label for="roomName" class="block mb-2 text-sm font-medium text-white">Room Name</label>
+                                    <input type="text" name="roomName" id="roomName"
+                                        class="bg-white border border-teal-300 text-black text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-600" placeholder="Enter your room name" required>
+                                </div>
+                                <div>
+                                    <label for="roomDescription" class="block mb-2 text-sm font-medium text-white">Your room description</label>
+                                    <textarea id="roomDescription" name="roomDescription" rows="4" class="block p-2.5 w-full text-sm text-black bg-white rounded-lg border border-teal-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-600" placeholder="Write room description here..." required></textarea>
+                                </div>
+                                <button type="submit"
+                                    class="w-full text-white bg-green-600 hover:bg-green-900 focus:ring-4 focus:outline-none focus:ring-green-300 focus:border-green-500 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Create Room</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+{% endblock %}
+
 {% block content %}
+
 <div class="p-10 lg:p-20 text-center">
     <h1 class="text-3xl lg:text-6xl text-white">Rooms</h1>
 </div>
 
 <div class="w-full flex flex-wrap items-center">
     {% for room in rooms %}
-        <div class="w-full lg:w-1/4 px-3 py-3">
+        <div class="w-full md:w-2/4 lg:w-1/4 px-3 py-3">
             <div class="p-4 bg-white shadow rounded-xl text-center">
-                <h2 class="mb-5 text-2xl font-semibold">{{ room.name|capfirst}} </h2>
-
-                <a href="{% url 'room' room.slug %}" class="px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">JOIN</a>
+                <h2 class="mb-2 text-2xl font-semibold">{{ room.name|capfirst}} </h2>
+                <small >Created By {{room.creator}}</small>
+                <a href="{% url 'room' room.slug %}" class="mt-1 px-5 py-3 block rounded-xl text-white bg-teal-600 hover:bg-teal-700">JOIN</a>
             </div>
         </div>
     {% endfor %}

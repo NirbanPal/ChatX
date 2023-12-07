@@ -34,7 +34,7 @@ socket.onerror = function(e){
     console.log("Error")
 }
 
-//If there is sny incoming message in the socket
+//If there is any incoming message in the socket
 socket.onmessage = function(e){
     const data = JSON.parse(e.data)
     if(data.message && data.username===sender_username){
@@ -51,7 +51,7 @@ socket.onmessage = function(e){
         document.querySelector("#chat-body").innerHTML += `
         <tr>
             <td>
-                <p class="bg-primary p-2 mt-2 mr-5 shadow-sm text-white float-left rounded">
+                <p class="bg-primary p-2 mt-2 ml-3 shadow-sm text-white float-left rounded">
                     ${data.message}
                 </p>
             </td>
