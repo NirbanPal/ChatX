@@ -65,3 +65,20 @@
   .not-allowed {
     cursor: not-allowed !important;
 }
+
+@media screen and (max-width: 575px) {
+
+  .mobileChatArea,.mobileuserlist,#chat-message-submit span,.mobilechatlogo {
+    display: none !important;
+  }
+
+  .mobileSearchbar{
+    padding-right: 0px;
+  }
+
+  .mobileline{
+    border-bottom: 1px solid;
+  }
+
+
+}
