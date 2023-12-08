@@ -249,8 +249,3 @@ class ChatConsumer(AsyncWebsocketConsumer):
 
 
         Message.objects.create(user=user, room=room, content=message)
-
-
-
-
-

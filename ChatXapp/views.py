@@ -47,7 +47,7 @@ def room(request,slug):
     return render(request, 'rooms/room.html', {'room': room, 'messages': messages})
 
 
-
+@login_required
 def createrooms(request):
 
     roomName = request.POST['roomName']

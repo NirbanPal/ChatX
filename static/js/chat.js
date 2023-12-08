@@ -41,7 +41,7 @@ socket.onmessage = function(e){
         document.querySelector("#chat-body").innerHTML += `
         <tr>
             <td>
-                <p class="bg-success p-2 mt-2 mr-5 shadow-sm text-white float-right rounded">
+                <p class="bg-success p-2 mt-2 mr-3 shadow-sm text-white float-right rounded">
                     ${data.message}
                 </p>
             </td>
@@ -59,7 +59,7 @@ socket.onmessage = function(e){
 
     }
 
-    
+    scrollToBottom()
 
 }
 
@@ -87,7 +87,6 @@ sendButton.onclick = function(e){
         messageInput.value='';
         sendButton.disabled = true;
         sendButton.classList.add('not-allowed','disabled')
-        // scrollToBottom()
         return false
     }
 }
@@ -109,13 +108,14 @@ messageInput.addEventListener('input', function() {
     }
 });
 
-//scroll to bottom
-// function scrollToBottom() {
-//     let objDiv = document.getElementById("chat-body");
-//     console.log(objDiv.scrollHeight)
+// scroll to bottom
+function scrollToBottom() {
+    // Get the last element within #chat-body
+    var lastElement = document.getElementById('chat-body').lastElementChild;
 
-//     objDiv.scrollTop = objDiv.scrollHeight;
-// }
+    // Scroll the last element into view
+    lastElement.scrollIntoView();
+}
 
-// scrollToBottom()
+scrollToBottom()
 
