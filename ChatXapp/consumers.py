@@ -39,7 +39,6 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         message=data['message']
         messageSender = data['username']
         messageReceiver=data['receiver']
-        print(messageReceiver)
 
         await self.save_message(messageSender,message,self.room_group_name,messageReceiver)
 
@@ -97,7 +96,6 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
     async def send_notification(self,event):
         data=json.loads(event['value'])
-        print(event)
         await self.send(text_data=json.dumps({
             'countOfNotifi':data['noOfNotifi']
         }))
