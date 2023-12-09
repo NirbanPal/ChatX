@@ -10,7 +10,7 @@ from asgiref.sync import async_to_sync
 #Signals for Notifications
 @receiver(post_save,sender=ChatNotification)
 def send_notification(sender,instance,created,**kwargs):
-    if created:
+    if created or not created:
         channel_layer = get_channel_layer()
         #unseen messages
         unseenNotifiCounts = ChatNotification.objects.filter(user=instance.user,is_seen=False).count()
@@ -20,7 +20,6 @@ def send_notification(sender,instance,created,**kwargs):
         data={
             'noOfNotifi':unseenNotifiCounts,
         }
-        print(room_gr_name)
     
         async_to_sync(channel_layer.group_send)(
             room_gr_name,
@@ -30,18 +29,6 @@ def send_notification(sender,instance,created,**kwargs):
             }
 
         )
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

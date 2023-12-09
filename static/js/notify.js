@@ -25,6 +25,5 @@ var badge = document.getElementById('count_badge')
 notifySocket.onmessage=function(e){
     data = JSON.parse(e.data)
     badge.innerHTML=data['countOfNotifi']
-    console.log(data['countOfNotifi'])
     
 }

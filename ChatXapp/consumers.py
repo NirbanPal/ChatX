@@ -23,6 +23,7 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
             self.channel_name,
         ) 
 
+        await self.seen_notifications(my_id,other_user_id)
         await self.accept()
         # await self.send(text_data=self.room_group_name)
     
@@ -73,7 +74,18 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         receiverObj = User.objects.get(id=other_user_id)
         if messageReceiver == receiverObj.username:
             ChatNotification.objects.create(chat=Chatobj,user=receiverObj)
-            # pass
+
+    @database_sync_to_async
+    def seen_notifications(self,notiReceiverid,notiSenderid):
+        try:
+            myselfReceiver = User.objects.get(id=notiReceiverid)
+            ChatNotification.objects.filter(chat__sender=User.objects.get(id=notiSenderid),user=myselfReceiver).update(is_seen=True)
+
+        except Exception as e:
+            print(e)
+
+        
+
 
 # @method_decorator(login_required, name='dispatch') 
 class NotificationConsumer(AsyncWebsocketConsumer):
@@ -99,6 +111,8 @@ class NotificationConsumer(AsyncWebsocketConsumer):
         await self.send(text_data=json.dumps({
             'countOfNotifi':data['noOfNotifi']
         }))
+
+    
 
 
 
