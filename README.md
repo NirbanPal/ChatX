@@ -26,7 +26,7 @@
    cd <directory>
    ```
    
-3. Put your django secret key in the settings.py SECRET_KEY section. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
+3. Put your django secret key in the settings.py SECRET_KEY section and do DUBUG=FALSE for production. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
 
 4. Install virtual environment(if not preinstalled):
    ```pip
