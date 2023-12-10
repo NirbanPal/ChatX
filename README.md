@@ -58,8 +58,13 @@
    ```python
    python manage.py migrate
    ```
+9. Collection os static files->
+    
+    ```python
+    python manage.py collectstatic
+    ```
 
-9. To run the application in your local machine->
+10. To run the application in your local machine->
    
    ```uvicorn
    uvicorn ChatX.asgi:application
