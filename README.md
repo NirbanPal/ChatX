@@ -67,7 +67,7 @@
     python manage.py collectstatic
     ```
 
-10. To run the application in your local machine->
+10. To run this application in your local machine->
    
    ```uvicorn
    uvicorn ChatX.asgi:application
