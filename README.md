@@ -12,7 +12,7 @@
 
 
 **Tech used->**
-<p> HTML , CSS, TAILWIND CSS, BOOTSTRAP, JAVASCRIPT, WEB SOCKETS, DJANGO, DJANGO CHANNELS, DJANGO SIGNALS, REDIS(MEMURAI FOR WINDOWS), PYTHON, MYSQL, UVICORN(AS ASGI SERVER)</p>
+<p> HTML , CSS, TAILWIND CSS, BOOTSTRAP, JAVASCRIPT, WEB SOCKETS, DJANGO, DJANGO CHANNELS, DJANGO SIGNALS, REDIS(MEMURAI FOR WINDOWS), PYTHON, MYSQL, WHITENOISE(FOR SERVING STATIC FILE WHEN NGINX IS NOT USED), UVICORN(AS ASGI SERVER)</p>
 
 **Setup this project**
 1. Clone this git repo->
@@ -26,26 +26,30 @@
    cd <directory>
    ```
    
-3. Put your django secret key in the settings.py SECRET_KEY section and create a online redis account and get the host from it and put in the host section of CHANNEL_LAYERS. I have given the instructions how to get the host from online in settings.py also.
-   
-4. Create virtual environment->
+3. Put your django secret key in the settings.py SECRET_KEY section. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
+
+4. Install virtual environment(if not preinstalled):
+   ```pip
+   pip install virtualenv
+   ```
+5. Create virtual environment->
    
    ```python
    python -m venv <your_virtual_environment_name>
    ```
-5. To activate your virtual environment(windows)->
+6. To activate your virtual environment(windows)->
 
-   ```python
+   ```shell
    <your_virtual_environment_name>\Scripts\activate
    ```
    
-6. Install dependencies(requirements.py file)->
+7. Install dependencies(requirements.py file)->
    
-   ```python
+   ```pip
    pip install -r requirements.py
    ```
 
-7. Migrate your database->
+8. Migrate your database->
 
    ```python
    python manage.py makemigrations
@@ -55,7 +59,7 @@
    python manage.py migrate
    ```
 
-8. To run the application in your local machine->
+9. To run the application in your local machine->
    
    ```uvicorn
    uvicorn chatproject.asgi:application
