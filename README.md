@@ -71,3 +71,6 @@
    uvicorn chatproject.asgi:application --workers=n
    ```
 
+**Contributions->**
+<p>Any contributions from the community is welcomed. If you find any bugs or have suggestions for new features, please submit an issue or create a pull request.</p>
+
