@@ -18,9 +18,9 @@
 
 1. Clone this git repo->
 
-  ```git
-  git clone https://github.com/NirbanPal/ChatX.git
-  ```
+    ```git
+    git clone https://github.com/NirbanPal/ChatX.git
+    ```
 
 2. Go to the directory->
 
@@ -69,14 +69,15 @@
 
 10. To run this application in your local machine->
    
-   ```uvicorn
-   uvicorn ChatX.asgi:application
-   ```
-   
-   ```uvicorn
-   #Here n is number of workers. example->uvicorn ChatX.asgi:application --workers=4
-   uvicorn ChatX.asgi:application --workers=n
-   ```
+    ```uvicorn
+    uvicorn ChatX.asgi:application
+    ```
+    or
+    
+    ```uvicorn
+    #Here n is number of workers. example->uvicorn ChatX.asgi:application --workers=4
+    uvicorn ChatX.asgi:application --workers=n
+    ```
 
 **➤ Contributions :**
 <p>Any contributions from the community is welcomed. If you find any bugs or have suggestions for new features, please submit an issue or create a pull request.</p>
