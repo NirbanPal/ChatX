@@ -1,7 +1,7 @@
 # ChatX
 <p>ChatX is an interactive, real-time, responsive web-based chat application built on the popular web-development Python framework Django. </p>
 
-**Features->**
+**➤ Features :**
 <p><b>The key features of this chat application include:-</b></p>
 <p>1. Enabling real-time conversations between users. Users can interact with eachother.</p>
 <p>2. Easy identification of users' application usage status by indicating whether they are online or offline fostering a sense of real-time connectivity</p>
@@ -11,10 +11,10 @@
 <p>6. User will get notifications on receiving a message. After reading that message the notification from that message will be vanished.</p>
 
 
-**Tech used->**
+**➤ Tech used :**
 <p> HTML , CSS, TAILWIND CSS, BOOTSTRAP, JAVASCRIPT, WEB SOCKETS, DJANGO, DJANGO CHANNELS, DJANGO SIGNALS, REDIS(MEMURAI FOR WINDOWS), PYTHON, MYSQL, WHITENOISE(FOR SERVING STATIC FILES WHEN NGINX IS NOT USED), UVICORN(AS ASGI SERVER)</p>
 
-**Setup this project**
+**➤ Setup this project :**
 1. Clone this git repo->
 
   ```git
@@ -71,6 +71,5 @@
    uvicorn chatproject.asgi:application --workers=n
    ```
 
-**Contributions->**
+**➤ Contributions :**
 <p>Any contributions from the community is welcomed. If you find any bugs or have suggestions for new features, please submit an issue or create a pull request.</p>
-
