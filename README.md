@@ -19,18 +19,19 @@
 1. Clone this git repo->
 
   ```git
-  git clone <gitRepoLink>
+  git clone https://github.com/NirbanPal/ChatX.git
   ```
 
 2. Go to the directory->
 
-   ```git
-   cd <directory>
+   ```shell
+   cd ChatX
    ```
    
 3. Put your django secret key in the settings.py SECRET_KEY section and do DUBUG=FALSE for production. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
 
 4. Install virtual environment(if not preinstalled):
+
    ```pip
    pip install virtualenv
    ```
@@ -71,7 +72,6 @@
    ```uvicorn
    uvicorn ChatX.asgi:application
    ```
-   or
    
    ```uvicorn
    #Here n is number of workers. example->uvicorn ChatX.asgi:application --workers=4
