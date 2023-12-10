@@ -62,13 +62,13 @@
 9. To run the application in your local machine->
    
    ```uvicorn
-   uvicorn chatproject.asgi:application
+   uvicorn ChatX.asgi:application
    ```
    or
    
    ```uvicorn
-   #Here n is number of workers. example->uvicorn chatproject.asgi:application --workers=4
-   uvicorn chatproject.asgi:application --workers=n
+   #Here n is number of workers. example->uvicorn ChatX.asgi:application --workers=4
+   uvicorn ChatX.asgi:application --workers=n
    ```
 
 **➤ Contributions :**
