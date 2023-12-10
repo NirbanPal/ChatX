@@ -1,5 +1,5 @@
 # ChatX
-<p>ChatX is an interactive, real-time, web-based chat application built on the popular web-development Python framework Django. </p>
+<p>ChatX is an interactive, real-time, responsive web-based chat application built on the popular web-development Python framework Django. </p>
 
 **Features->**
 <p><b>The key features of this chat application include:-</b></p>
