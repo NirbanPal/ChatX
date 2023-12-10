@@ -82,7 +82,7 @@
 **➤ Contributions :**
 <p>Any contributions from the community is welcomed. If you find any bugs or have suggestions for new features, please submit an issue or create a pull request. Some features will be added in future also.</p>
 
-**➤ Glimpses of my website :**
+**➤ Glimpses of ChatX :**
 
 <a href="https://ibb.co/3RQdSRH"><img src="https://i.ibb.co/dmxMkmy/signuppage.png" alt="signuppage" border="0"></a><br />
 <a href="https://ibb.co/WfDKtgp"><img src="https://i.ibb.co/gJvgVzF/loginpage.png" alt="loginpage" border="0"></a>
