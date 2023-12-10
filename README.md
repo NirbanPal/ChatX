@@ -15,11 +15,13 @@
 <p> HTML , CSS, TAILWIND CSS, BOOTSTRAP, JAVASCRIPT, WEB SOCKETS, DJANGO, DJANGO CHANNELS, DJANGO SIGNALS, REDIS(MEMURAI FOR WINDOWS), PYTHON, MYSQL, WHITENOISE(FOR SERVING STATIC FILES WHEN NGINX IS NOT USED), UVICORN(AS ASGI SERVER)</p>
 
 **➤ Setup this project :**
+
 1. Clone this git repo->
 
   ```git
   git clone <gitRepoLink>
   ```
+
 2. Go to the directory->
 
    ```git
