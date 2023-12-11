@@ -2,10 +2,8 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from channels.db import database_sync_to_async
 from .models import ChatModel,User, UserProfileModel, ChatNotification,Room, Message
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
 
-# @method_decorator(login_required, name='dispatch') 
+
 class PersonalChatConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         #get the id of the current user (as we are using AuthMiddleWareStack that's why we are geeting the id here)
@@ -17,7 +15,7 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
             self.room_name = f'{other_user_id}-{my_id}'
 
         self.room_group_name = 'chat_%s' % self.room_name
-    
+
         await self.channel_layer.group_add(
             self.room_group_name,
             self.channel_name,
@@ -84,10 +82,7 @@ class PersonalChatConsumer(AsyncWebsocketConsumer):
         except Exception as e:
             print(e)
 
-        
 
-
-# @method_decorator(login_required, name='dispatch') 
 class NotificationConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         user_id = self.scope['user'].id
@@ -119,7 +114,6 @@ class NotificationConsumer(AsyncWebsocketConsumer):
 
 
 
-# @method_decorator(login_required, name='dispatch')         
 class OnlineStatusConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         self.room_group_name = 'user'
@@ -172,7 +166,6 @@ class OnlineStatusConsumer(AsyncWebsocketConsumer):
 
 
 # rooms websocket and channels
-# @method_decorator(login_required, name='dispatch') 
 class ChatConsumer(AsyncWebsocketConsumer):
     #function of connecting to the server
 

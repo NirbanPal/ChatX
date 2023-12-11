@@ -1,0 +1,40 @@
+Here we will use redis as a message server. that means we will be using the redis as a message broker here.
+
+pip install channels
+pip install channels-redis
+
+Go to the settings page and add CHANNEL_LAYERS, add channels in the installed apps, ASGI_APPLICATION=projectname.asgi.application
+
+create consumers.py and write the class and a async methods under that.(example->async def connect(self):pass) 
+
+Go to the asgi.py file and import the things which are required and and configure the application variable(application=) then create the link for that otherwise you also can create a router.py and create the websocket_url there like this (websocket_url = [
+    path('',appname.consumers.classname.as_asgi())
+]) 
+
+Then you can import this websocket_url from router.py and use this in the asgi.py. Otherwise you can create the url path in the asgi.py application= section even.
+
+here we will create our personal chat user for one to one user interaction. 
+
+Then we will write the code of creating socket in js (client end). Then we will write the code of (channels here)channel_layer.group_add , channel_layer.group_discard, channel_layer. group_send (etc)
+
+
+
+signals.py -> As soon as the connection type is updated in database I want to notify all user that his status is updated. means he is online/offline. So we will implement django signals for this. Django singnals are used to trigger some kind of events after save methods. There are bunch of django signals like presave(just before save method) postsave(just after save method) , m2mchage, premigrate etc. example-> if ypu want to create a user profile model after user is registered.  
+
+To set up signal-> we have to folloe the below points->
+
+1) Create a signals.py file into that app(here ChatX)
+2) Copy and paste this in apps.py under AppConfig class in that app.
+
+    def ready(self) -> None:
+        import ChatXapp.signals
+
+3) In __init__.py file in that app write this->
+default_app_config = 'ChatXapp.apps.ChatxappConfig'
+default_app_config = 'appName.apps.className'
+
+
+Start memurai(Redis) server-> Open Command prompt run "memurai" command(after installing the memurai for windows only)
+
+
+
