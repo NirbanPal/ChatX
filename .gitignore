@@ -3,6 +3,5 @@ note.txt
 db.sqlite3
 *.pyc
 __pycache__
-migrations
 ChatXapp/signalsDemo.py
 static_collection
