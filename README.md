@@ -28,20 +28,18 @@
    cd ChatX
    ```
 
-3. Create a database(Here mysql is used) and Configure your database in settings.py like this->
+3. Create a .env file and create a database and give the credentials of that databse in that .env file. Put your django secret key in SECRET_KEY section and do DUBUG=FALSE for production.
     ```
-       DATABASES = {
-            'default': {
-                'ENGINE':'django.db.backends.mysql',
-                'NAME':'your_database_name',
-                'USER':'your_DB_username',
-                'PASSWORD':'DB_password',
-                'HOST':'localhost',
-                'PORT':3307,
-            }
-        } 
+        SECRET_KEY='putyoursecretkey'
+        DEBUG=False
+        ENGINE='django.db.backends.mysql'
+        HOST='putyouhost'
+        NAME='putyourdbname'
+        USER='putyourdbusername'
+        PASSWORD='putdbpassword'
+        PORT='portnumber'
     ```
-4. Put your django secret key in the settings.py SECRET_KEY section and do DUBUG=FALSE for production. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
+4. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
 
 5. Install virtual environment(if not preinstalled):
 
