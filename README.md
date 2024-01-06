@@ -28,7 +28,7 @@
    cd ChatX
    ```
 
-3. Create a database(Here mysql is used) and add that in DATABASE section in settings.py->
+3. Create a database(Here mysql is used) and Configure your database in settings.py like this->
     ```
        DATABASES = {
             'default': {
