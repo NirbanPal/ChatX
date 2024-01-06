@@ -37,7 +37,7 @@
                 'USER':'your_DB_username',
                 'PASSWORD':'DB_password',
                 'HOST':'localhost',
-                'PORT':3306,
+                'PORT':3307,
             }
         } 
     ```
