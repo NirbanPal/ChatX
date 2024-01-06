@@ -27,32 +27,45 @@
    ```shell
    cd ChatX
    ```
-   
-3. Put your django secret key in the settings.py SECRET_KEY section and do DUBUG=FALSE for production. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
 
-4. Install virtual environment(if not preinstalled):
+3. Create a database(Here mysql is used) and add that in DATABASE section in settings.py->
+    ```
+       DATABASES = {
+            'default': {
+                'ENGINE':'django.db.backends.mysql',
+                'NAME':'your_database_name',
+                'USER':'your_DB_username',
+                'PASSWORD':'DB_password',
+                'HOST':'localhost',
+                'PORT':3306,
+            }
+        } 
+    ```
+4. Put your django secret key in the settings.py SECRET_KEY section and do DUBUG=FALSE for production. Download and install memurai for windows or install redis for linux. Run memurai or redis using command prompt.
+
+5. Install virtual environment(if not preinstalled):
 
    ```pip
    pip install virtualenv
    ```
-5. Create virtual environment->
+6. Create virtual environment->
    
    ```python
    python -m venv <your_virtual_environment_name>
    ```
-6. To activate your virtual environment(windows)->
+7. To activate your virtual environment(windows)->
 
    ```shell
    <your_virtual_environment_name>\Scripts\activate
    ```
    
-7. Install dependencies(requirements.py file)->
+8. Install dependencies(requirements.py file)->
    
    ```pip
    pip install -r requirements.txt
    ```
 
-8. Migrate your database->
+9. Migrate your database->
 
    ```python
    python manage.py makemigrations
@@ -61,13 +74,13 @@
    ```python
    python manage.py migrate
    ```
-9. Collection os static files->
+10. Collection os static files->
     
     ```python
     python manage.py collectstatic
     ```
 
-10. To run this application in your local machine->
+11. To run this application in your local machine->
    
     ```uvicorn
     uvicorn ChatX.asgi:application
